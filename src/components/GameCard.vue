@@ -169,7 +169,7 @@
   @import "../styles/index.scss";
   
   $cardsTotal: 3;
-  $cardsWidth: 300px;
+  $cardsWidth: 450px;
   $cardsPositionOffset: 55vh * 0.06;
   $cardsScaleOffset: 0.08;
   $defaultTranslation: $cardsPositionOffset * $cardsTotal;
@@ -192,7 +192,7 @@
     }
   
     display: flex;
-    max-height: 350px;
+    max-height: 600px;
     margin: auto;
     font-size: $fs-h2;
     font-weight: $fw-bold;

@@ -35,7 +35,7 @@
     position: relative;
     display: flex;
     margin: 50px;
-    width: 300px;
+    width: 400px;
   }
   </style>
   

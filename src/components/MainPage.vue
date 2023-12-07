@@ -1,18 +1,23 @@
 <template>
-    <div style="min-height: 100%;">
-        <v-layout class="d-flex justify-space-around">
+    <div>
+        <v-layout 
+            class="d-flex justify-center" 
+            style="
+                overflow: visible;
+                margin-top: 30px;
+            ">
             <!-- Bouton Faux-->
             <div class="d-flex align-center">
                 <v-btn 
                     @click="handleLeftButtonClick"
-                    style="right:-150px"
                     elevation="5"
                     icon="mdi-close"
                     size="x-large"
+                    style="top: 270px"
                 >
                 </v-btn>
             </div>
-            <div class="d-flex align-center">
+            <div>
                 <GameCardsStack
                     :cards="visibleCards"
                     @cardAccepted="handleCardAccepted"
@@ -20,75 +25,27 @@
                     @cardSkipped="handleCardSkipped"
                     @hideCard="removeCardFromDeck"
                 />
-
-                <!-- 
-                    <v-card 
-                        class="
-                            position-relative 
-                            mt-16
-                            rotate-card-2
-                        " 
-                        width="400"
-                        height="600"
-                        style="
-                            right: -460px;
-                            top: -30px
-                        "
-                        elevation="5"
-                    >
-                        <v-card-title>Carte 3</v-card-title>
-                    </v-card>
-                    <v-card 
-                    class="
-                        position-relative 
-                        mt-16
-                        rotate-card-1
-                    " 
-                    width="400"
-                    height="600"
-                    style="
-                        top: -15px;
-                        right: -50px
-                    "
-                    elevation="5"
-                >
-                    <v-card-title>Carte 2</v-card-title>
-                </v-card>
-                <v-card 
-                    class="mt-16"
-                    width="400"
-                    height="600"
-                    style="
-                        right: 370px;
-                    "
-                    elevation="5"
-                >
-                    <v-card-title>Carte 1</v-card-title>
-                </v-card>
-            -->
-
             </div>
             <!-- Bouton Vrai-->
             <div class="d-flex align-center">
                 <v-btn
                     @click="handleLeftButtonClick"
-                    style="left:-150px"
+                    style="top: 270px"
                     elevation="5"
                     icon="mdi-check"
                     size="x-large"
                 >
                 </v-btn>
+                <v-btn 
+                    @click="handleBottomRightButtonClick" 
+                    class="bottom-right-button"
+                    icon="mdi-chat"
+                    size="large"
+                    style="top:550px"
+                ></v-btn>
             </div>
         </v-layout>
     </div>
-    <v-row class="bottom-right-button-row">
-        <v-btn 
-            @click="handleBottomRightButtonClick" 
-            class="bottom-right-button"
-            icon="mdi-chat"
-            size="large"
-            ></v-btn>
-    </v-row>
 </template>
 
 <script>
@@ -134,7 +91,6 @@
         transform: rotate(10deg);
     }
     .bottom-right-button-row {
-        position: absolute;
         bottom: 10px;
         right: 10px;
         margin: 40px;
