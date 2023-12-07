@@ -1,10 +1,6 @@
 <template>
-  <v-app-bar flat>
-    <v-app-bar-title>
-      <v-icon icon="mdi-circle-slice-4" />
-
-      Base Preset
-    </v-app-bar-title>
+  <v-app-bar :elevation="2">
+    <v-app-bar-title text="Kahoot Tinder"/>
   </v-app-bar>
 </template>
 
