@@ -59,7 +59,7 @@ export default {
   computed: {
     transformString() {
       if (!this.isInteractAnimating || this.isInteractDragged) {
-        const { x, y, rotation } = this.interactPosition;
+        const {x, y, rotation} = this.interactPosition;
         return `translate3D(${x}px, ${y}px, 0) rotate(${rotation}deg)`;
       }
 
@@ -67,8 +67,14 @@ export default {
     }
   },
   mounted() {
+    if (this.card.id % 2 === 0) {
+      //change the backgroundImage of my card with a linear gradient
+      this.$refs.interactElement.style.backgroundImage = "linear-gradient(-180deg, #d94e47 2%, #df1165 100%)";
+    }
+    else {
+      this.$refs.interactElement.style.backgroundImage = "linear-gradient(180deg, #1adc6a 2%, #00d4ff 100%)";
+    }
     const element = this.$refs.interactElement;
-
     interact(element).draggable({
       onstart: () => {
         this.isInteractAnimating = false;
@@ -200,11 +206,6 @@ $fs-card-title: 3.525em;
   font-size: $fs-h2;
   font-weight: $fw-bold;
   color: $c-white;
-  background-image: linear-gradient(
-    -180deg,
-    $primary-gradient-start 2%,
-    $primary-gradient-end 100%
-  );
   opacity: 0;
   transform: translateY($defaultTranslation) scale($defaultScale);
   transform-origin: 50%, 100%;
