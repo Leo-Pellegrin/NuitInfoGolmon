@@ -56,7 +56,6 @@ export default {
       }
     };
   },
-
   computed: {
     transformString() {
       if (!this.isInteractAnimating || this.isInteractDragged) {
@@ -67,7 +66,6 @@ export default {
       return null;
     }
   },
-
   mounted() {
     const element = this.$refs.interactElement;
 
