@@ -7,6 +7,7 @@
       isCurrent: isCurrent
     }"
     class="card"
+    :id="card.id"
     :style="{ transform: transformString}"
     style="text-align: center"
   >
@@ -19,12 +20,51 @@
 
 <script>
 import interact from 'interactjs/dist/interact.js';
+import { useTheme } from 'vuetify';
+import { watch } from 'vue';
+
 
 const ACCEPT_CARD = "cardAccepted";
 const REJECT_CARD = "cardRejected";
 const SKIP_CARD = "cardSkipped";
 
 export default {
+  setup(){
+    const theme = useTheme();
+    console.log(theme.global.current.value.dark)
+    watch(() => theme.global.current.value.dark, (newValue, oldValue) => {
+      
+      let cards = document.getElementById("visibleCards");
+      if(theme.global.current.value.dark){
+        console.log(theme.global.current.value.dark)
+        console.log(cards.childNodes)
+        for(let card of cards.children) {
+          console.log(card.id)
+          if (card.id % 2 === 0) {
+            card.style.backgroundImage = "linear-gradient(180deg, #013972 2%, #116897 100%)";
+            console.log(card.style.backgroundImage)
+          }
+          else{
+            card.style.backgroundImage = "linear-gradient(180deg, #01151A 2%, #06283E 100%)"
+            console.log(card.style.backgroundImage)
+          }
+        }
+      }
+      else{
+        for(let card of cards.children) {
+          if (card.id % 2 === 0) {
+            card.style.backgroundImage = "linear-gradient(180deg, #F1A3A9 2%, #F9BBAC 100%)";
+          }
+          else{
+            card.style.backgroundImage = "linear-gradient(180deg, #394635 2%, #FCED98 100%)"
+          }
+        }
+      }
+    });
+    return {
+      theme
+    }
+  },
   static: {
     interactMaxRotation: 15,
     interactOutOfSightXCoordinate: 500,
@@ -68,11 +108,21 @@ export default {
   },
   mounted() {
     if (this.card.id % 2 === 0) {
+      if(this.theme.global.current.value.dark) {
+        this.$refs.interactElement.style.backgroundImage = "linear-gradient(180deg, #013972 2%, #116897 100%)";
+      }
+      else {
+        this.$refs.interactElement.style.backgroundImage = "linear-gradient(-180deg, #F1A3A9 2%, #F9BBAC 100%)";
+      }
       //change the backgroundImage of my card with a linear gradient
-      this.$refs.interactElement.style.backgroundImage = "linear-gradient(-180deg, #d94e47 2%, #df1165 100%)";
     }
     else {
-      this.$refs.interactElement.style.backgroundImage = "linear-gradient(180deg, #1adc6a 2%, #00d4ff 100%)";
+      if(this.theme.global.current.value.dark) {
+        this.$refs.interactElement.style.backgroundImage = "linear-gradient(180deg, #01151A 2%, #06283E 100%)"
+      }
+      else {
+        this.$refs.interactElement.style.backgroundImage = "linear-gradient(-180deg, #394635 2%, #FCED98 100%)";
+      }    
     }
     const element = this.$refs.interactElement;
     interact(element).draggable({
@@ -115,13 +165,15 @@ export default {
   },
 
   methods: {
+    themeColor(colorName) {
+      return this.$vuetify.theme.themes.light.colors[colorName];
+    },
     hideCard() {
       setTimeout(() => {
         this.isShowing = false;
         this.$emit("hideCard", this.card);
       }, 300);
     },
-
     playCard(interaction) {
       const {
         interactOutOfSightXCoordinate,

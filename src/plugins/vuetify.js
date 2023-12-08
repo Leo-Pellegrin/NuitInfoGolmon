@@ -17,10 +17,21 @@ export default createVuetify({
     themes: {
       light: {
         colors: {
-          primary: '#1867C0',
-          secondary: '#5CBBF6',
+          color1Gradiant1: '#F1A3A9',
+          color2Gradiant1: '#F9BBAC',
+          color1Gradiant2: '#394635',
+          color2Gradiant2: '#FCED98',
         },
       },
+      dark: {
+        colors: {
+          color1Gradiant1: '#013972',
+          color2Gradiant1: '#116897',
+          color1Gradiant2: '#01151A',
+          color2Gradiant2: '#06283E',
+        },
+      },
+        
     },
   },
 })

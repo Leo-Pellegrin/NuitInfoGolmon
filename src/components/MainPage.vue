@@ -5,21 +5,19 @@
             style="
                 overflow: visible;
                 margin-top: 30px;
-                margin-left: 70px;
+                margin-left: 18px;
             ">
             <!-- Bouton Faux-->
             <div v-if="!finCards()">
-                <v-btn 
-                    @click="handleCardRejected"
-                    elevation="5"
-                    prepend-icon="mdi-gesture-swipe-left"
+                <v-card 
                     size="x-large"
-                    style="top: 300px; right: 100px"
+                    style="top: 300px; right: 100px; padding: 20px;"
                     stacked
                     rounded="xl"
-                >
-                Faux
-                </v-btn>
+                >   
+                    <v-icon style="margin-inline: auto;">mdi-gesture-swipe-left</v-icon>
+                    <p style="margin-top: 5px;">Faux</p>
+                </v-card>
             </div>
             <div v-if="finCards()" class="textFin">
                 <p style="font-weight: bold; font-size: 35px;">Bravo !</p>
@@ -37,31 +35,22 @@
             </div>
             <!-- Bouton Vrai-->
             <div v-if="!finCards()">
-                <v-btn
-                    @click="handleCardAccepted"
-                    style="top: 300px; left: 100px"
-                    elevation="5"
-                    prepend-icon="mdi-gesture-swipe-right"
+                <v-card 
                     size="x-large"
+                    style="top: 300px; left: 100px; padding:20px;"
                     stacked
                     rounded="xl"
-                >
-                    Vrai
-                </v-btn>
-                <v-btn 
-                    @click="chatBotButtonClick()" 
-                    class="bottom-right-button"
-                    icon="mdi-chat"
-                    size="large"
-                    style="top:550px; left:250px"
-                    rounded="xl"
-                >
-                </v-btn>
+                >   
+                    <v-icon style="margin-inline: auto;">mdi-gesture-swipe-right</v-icon>
+                    <p style="margin-top: 5px;">Vrai</p>
+                </v-card>        
             </div>
             <v-dialog v-model="dialogVisible" transition="dialog-top-transition" style="margin-inline: 150px;">
                 <template v-slot:default="{ isActive }">
-                    <v-card>
-                        <v-toolbar :color="colorExplication" :title="TitreExplication" style="text-align:center"></v-toolbar>
+                    <v-card rounded="xl">
+                        <v-toolbar :color="colorExplication" style="text-align:center">
+                            <v-toolbar-title style="font-size: 1.5em; font-weight: bold;">{{ this.TitreExplication }}</v-toolbar-title>
+                        </v-toolbar>
                         <v-card-text>
                             <div class="pa-12" style="text-align: center; margin-inline: 20px;">{{ this.textExplication }}</div>
                         </v-card-text>
@@ -203,9 +192,7 @@
         created() {
         // Initialisation de visibleCards après la création du composant
             this.visibleCards = this.cards.questions.slice(0, 5);
-            console.log(this.visibleCards)
             this.cards.questions = this.cards.questions.slice(5);
-            console.log(this.cards.questions)
         },
         methods: {
             handleCardAccepted() {
@@ -241,9 +228,7 @@
                 this.visibleCards.shift();
                 if(this.cards.questions.length > 0){
                     this.visibleCards.push(this.cards.questions[0]);
-                    console.log(this.visibleCards)
                     this.cards.questions = this.cards.questions.slice(1);
-                    console.log(this.cards)
                 }
             },
             finCards(){
